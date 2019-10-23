@@ -1,0 +1,6 @@
+aws_access_key      ="xxxxxxxxxxxxxxxxxxxx"
+aws_secret_key      ="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+controller_ip       = "54.176.159.229"
+controller_username = "admin"
+controller_password = "password123"
+controller_email    = "user@domain.com"
