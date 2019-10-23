@@ -1,5 +1,5 @@
 resource "aviatrix_gateway" "OnPrem-GW" {
-    cloud_type             = 1
+    cloud_type             = var.tag.cloud_type
     account_name           = var.tag.account_name
     gw_name                = var.tag.onprem_gw_name
     vpc_id                 = var.tag.vpc_id
@@ -11,7 +11,7 @@ resource "aviatrix_gateway" "OnPrem-GW" {
 resource "aviatrix_vgw_conn" "vgw_to_transit" {
     bgp_vgw_account        = var.tag.account_name
     bgp_vgw_region         = var.tag.region
-    vpc_id                 = var.tag.vpc_id
+    vpc_id                 = var.tag.transit_vpc_id
     conn_name              = var.tag.conn_name
     gw_name                = var.transit_gw
     bgp_vgw_id             = var.tag.vgw_id
@@ -40,8 +40,6 @@ resource "aws_vpn_connection_route" "onprem1" {
     destination_cidr_block = var.tag.static_routes1[count.index]
     vpn_connection_id      = aws_vpn_connection.onprem.id
 }
-    #count                  = length(local.static_routes1)
-    #destination_cidr_block = local.static_routes1[count.index]
 resource "aviatrix_site2cloud" "onprem-vgw" {
     vpc_id                 = var.tag.vpc_id
     connection_name        = "site2cloud_to_vgw"

@@ -1,7 +1,7 @@
 variable "controller_ip"       {}
 variable "controller_username" {}
 variable "controller_password" {}
-variable "controller_email"    {}
+variable "account_name"        {}
 variable "aws_access_key"      {}
 variable "aws_secret_key"      {}
 variable "ondemand_spoke_count"{default = 0}
@@ -10,14 +10,20 @@ variable "spoke_region"        {default = "us-west-2"}
 variable "onprem_region"       {default = "us-west-2"}
 variable "cloud_type"          {default = "AWS"}
 variable "active_mesh"         {default = "false"}
+variable "spoke_vpc_id"        {}
+variable "spoke_subnet"        {}
+variable "spoke_ha_subnet"     {}
+variable "onprem_vpc_id"       {}
+variable "onprem_subnet"       {}
+variable "vgw_id"              {}
 
 locals {
-  account_name     = "EdselAWS"
+  account_name     = var.account_name
   common_gw_size   = "t2.micro"
   cloud_type       = (var.cloud_type == "AWS" ? 1 : 0)
   connected_transit= "false"
   single_az_ha     = "false"
-  transit_gateway_name= "cluster0-transit"
+  transit_gateway_name    = "cluster0-transit"
   skip_version_validation = true
 }
 locals  {
@@ -36,10 +42,10 @@ locals  {
   }
 
   spoke_tag        = {
-    spoke_region   = "us-west-2"
-    vpc_id         = "vpc-0cc2849a14c185847"
-    subnet         = "10.10.80.0/20"
-    ha_subnet      = "10.10.96.0/20"
+    spoke_region   = var.spoke_region
+    vpc_id         = var.spoke_vpc_id
+    subnet         = var.spoke_subnet
+    ha_subnet      = var.spoke_ha_subnet
     gw_size        = local.common_gw_size
     ha_gw_size     = local.common_gw_size
     cloud_type     = local.cloud_type
@@ -52,14 +58,16 @@ locals  {
     active_mesh    = (var.active_mesh == true ? "true" : "false")
   }
   onprem_tag = {
-    subnet         = "172.16.5.0/24"
-    vpc_id         = "vpc-0f35d2839d5754ad8"
-    account_name   = "EdselAWS"
+    cloud_type     = local.cloud_type
+    vpc_id         = var.onprem_vpc_id
+    subnet         = var.onprem_subnet
+    transit_vpc_id = aviatrix_vpc.transit_vpc.vpc_id
+    account_name   = var.account_name
     onprem_gw_name = "OnPrem"
-    onprem_gw_size = "t2.micro"
+    onprem_gw_size = local.common_gw_size
     remote_subnet  = "10.0.0.0/8"
-    vgw_id         = "vgw-07132d607eb041e4b"
-    region         = "us-west-2"
+    vgw_id         = var.vgw_id
+    region         = var.onprem_region
     bgp_asn        = "6592"
     conn_name      = "vgw_transit_connection"
     bgp_local_as_num = "6535"
