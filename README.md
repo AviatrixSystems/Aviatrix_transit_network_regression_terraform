@@ -6,7 +6,7 @@ Launch transit gateway, spoke gateway, and onprem gateway to simulate VGW connec
 Notes:
 1. Aviatrix Controller and admin user account is ready.
 2. Assume two (onprem and spoke) VPCs already exists with instances. 
-3. Transit VPC is dynamic. 
+3. Transit VPC is dynamically created by this test script.
 4. All gateways default to ActiveMesh disabled.
 
 #### 1. Setup provider credentials
