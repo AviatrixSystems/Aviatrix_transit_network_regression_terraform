@@ -12,8 +12,8 @@ Notes:
 #### 1. Setup provider credentials
 **mysecret.tfvars**
 ``` hcl
-aws_access_key      ="xxxxxxxxxxxxxxxxxxxx"
-aws_secret_key      ="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+aws_access_key      = "xxxxxxxxxxxxxxxxxxxx"
+aws_secret_key      = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 controller_ip       = "54.17.19.22"
 controller_username = "admin"
 controller_password = "password123"
