@@ -1,8 +1,8 @@
 output "TRANSIT_PUBLIC_SUBNET1" {
-  value = aviatrix_vpc.transit_vpc.public_subnets[0].cidr
+  value = aviatrix_vpc.transit_vpc.subnets[4].cidr
 }
 output "TRANSIT_PUBLIC_SUBNET2" {
-  value = aviatrix_vpc.transit_vpc.public_subnets[1].cidr
+  value = aviatrix_vpc.transit_vpc.subnets[5].cidr
 }
 output "STATIC_SPOKE_VPC" {
   value = local.spoke_tag.vpc_id
