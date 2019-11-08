@@ -38,7 +38,7 @@ locals  {
     account_name   = local.account_name
     vpc_reg        = var.spoke_region
     single_az_ha   = local.single_az_ha
-    active_mesh    = (var.active_mesh == true ? "true" : "false")
+    active_mesh    = var.active_mesh
   }
 
   spoke_tag        = {
@@ -55,7 +55,7 @@ locals  {
     gw_size        = local.common_gw_size
     ha_gw_size     = local.common_gw_size
     single_az_ha   = local.single_az_ha
-    active_mesh    = (var.active_mesh == true ? "true" : "false")
+    active_mesh    = var.active_mesh
   }
   onprem_tag = {
     cloud_type     = local.cloud_type
