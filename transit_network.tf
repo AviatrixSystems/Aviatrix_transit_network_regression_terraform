@@ -23,27 +23,19 @@ resource "aviatrix_transit_gateway" "transit_gw" {
 
 module "ondemand_spoke" {
    source             = "./ondemand_spoke"
-   providers          = {
-      aws = "aws.us-west-2"
-   }
    tag                = local.ondemand_tag
    transit_gw         = aviatrix_transit_gateway.transit_gw.gw_name
 }
 
 module "spoke" {
    source             = "./spoke"
-   providers          = {
-      aws = "aws.us-west-2"
-   }
    tag                = local.spoke_tag
    transit_gw         = aviatrix_transit_gateway.transit_gw.gw_name
+
 }
 
 module "simulated_onprem" {
    source             = "./onprem"
-   providers          = {
-      aws = "aws.us-west-2"
-   }
    tag                = local.onprem_tag
    transit_gw         = aviatrix_transit_gateway.transit_gw.gw_name
 }
