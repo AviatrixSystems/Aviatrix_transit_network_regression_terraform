@@ -1,7 +1,7 @@
-variable "controller_ip"       {}
-variable "controller_username" {}
-variable "controller_password" {}
-variable "account_name"        {}
+variable "controller_ip"       {default = "52.8.214.111"}
+variable "controller_username" {default = "admin"}
+variable "controller_password" {default = "Aviatrix123!"}
+variable "account_name"        {default = "EdselAWS"}
 variable "aws_access_key"      {}
 variable "aws_secret_key"      {}
 variable "ondemand_spoke_count"{default = 0}

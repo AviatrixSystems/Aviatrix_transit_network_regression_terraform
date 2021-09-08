@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    aviatrix = {
+      source = "AviatrixSystems/aviatrix"
+      version = "2.20"
+    }
+  }
+}
+
 provider "aws" {
   alias      = "ca-central-1"
   region     = "ca-central-1"
