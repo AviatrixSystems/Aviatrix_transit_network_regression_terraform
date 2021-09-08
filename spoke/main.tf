@@ -23,3 +23,8 @@ resource "aviatrix_spoke_gateway" "spoke" {
    enable_active_mesh = var.tag.active_mesh 
    transit_gw         = var.transit_gw
 }
+
+resource "aviatrix_spoke_transit_attachment" "spoke_transit_attachment_1" {
+    spoke_gw_name = aviatrix_spoke_gateway.spoke.gw_name
+    transit_gw_name = var.transit_gw
+}
