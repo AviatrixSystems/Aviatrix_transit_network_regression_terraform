@@ -7,6 +7,10 @@ terraform {
   }
 }
 
+# override the aws_access_key and aws_secret_key by export
+# AWS_ACCESS_KEY_ID=xxx
+# AWS_SECRET_ACCESS_KEY=yyy
+
 provider "aws" {
   alias      = "ca-central-1"
   region     = "ca-central-1"
