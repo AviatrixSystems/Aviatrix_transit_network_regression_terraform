@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aviatrix = {
+      source = "AviatrixSystems/aviatrix"
+      version = "2.20"
+    }
+  }
+}
 resource "aviatrix_gateway" "OnPrem-GW" {
     cloud_type             = var.tag.cloud_type
     account_name           = var.tag.account_name
@@ -33,7 +41,7 @@ resource "aws_vpn_connection" "onprem" {
     tags                   =    {
                    Name    = "site2cloud-to-vgw"
     }
-    depends_on = ["aviatrix_gateway.OnPrem-GW"]
+    depends_on = [aviatrix_gateway.OnPrem-GW]
 }
 resource "aws_vpn_connection_route" "onprem1" {
     count                  = length(var.tag.static_routes1)
@@ -50,7 +58,7 @@ resource "aviatrix_site2cloud" "onprem-vgw" {
     remote_gateway_ip      = aws_vpn_connection.onprem.tunnel1_address
     pre_shared_key         = aws_vpn_connection.onprem.tunnel1_preshared_key
     primary_cloud_gateway_name = aviatrix_gateway.OnPrem-GW.gw_name
-    depends_on             = ["aviatrix_gateway.OnPrem-GW"]
+    depends_on             = [aviatrix_gateway.OnPrem-GW]
 }
 
 

@@ -19,7 +19,7 @@ variable "vgw_id"              {}
 
 locals {
   account_name     = var.account_name
-  common_gw_size   = "t2.micro"
+  common_gw_size   = "t3.micro"
   cloud_type       = (var.cloud_type == "AWS" ? 1 : 0)
   connected_transit= "false"
   single_az_ha     = "false"
@@ -28,7 +28,7 @@ locals {
 }
 locals  {
   transit_region   = var.transit_region
-  gw_size          = "t2.micro"
+  gw_size          = "t3.small"
   transit_vpc_cidr = "10.100.0.0/16"
 
   ondemand_tag     = {
