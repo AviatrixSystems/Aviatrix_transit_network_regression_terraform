@@ -21,10 +21,11 @@ resource "aviatrix_spoke_gateway" "spoke" {
    ha_subnet          = var.tag.ha_subnet
    single_az_ha       = var.tag.single_az_ha
    enable_active_mesh = var.tag.active_mesh 
-   transit_gw         = var.transit_gw
+   manage_transit_gateway_attachment = false
 }
 
 resource "aviatrix_spoke_transit_attachment" "spoke_transit_attachment_1" {
     spoke_gw_name = aviatrix_spoke_gateway.spoke.gw_name
     transit_gw_name = var.transit_gw
+    depends_on      = [aviatrix_spoke_gateway.spoke]
 }
