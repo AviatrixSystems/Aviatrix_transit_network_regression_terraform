@@ -27,7 +27,7 @@ resource "aviatrix_vgw_conn" "vgw_to_transit" {
 }
 resource "aws_customer_gateway" "customer_gateway" {
     bgp_asn                = var.tag.bgp_asn
-    ip_address             = aviatrix_gateway.OnPrem-GW.public_ip
+    ip_address             = aviatrix_gateway.OnPrem-GW.eip
     type                   = "ipsec.1"
     tags                   = {
           Name = "onprem-gateway"
