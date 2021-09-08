@@ -52,7 +52,7 @@ resource "aviatrix_site2cloud" "onprem-vgw" {
     vpc_id                 = var.tag.vpc_id
     connection_name        = "site2cloud_to_vgw"
     connection_type        = "unmapped"
-    tunnel_type            = "udp"
+    tunnel_type            = "policy"
     remote_gateway_type    = "aws"
     remote_subnet_cidr     = var.tag.remote_subnet
     remote_gateway_ip      = aws_vpn_connection.onprem.tunnel1_address
