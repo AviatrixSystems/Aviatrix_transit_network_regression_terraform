@@ -31,6 +31,13 @@ resource "aviatrix_spoke_gateway" "spoke_ondemand_gw" {
    ha_subnet          = "10.250.${count.index}.98/28"
    single_az_ha       = var.tag.single_az_ha
    enable_active_mesh = var.tag.active_mesh
-   transit_gw         = var.transit_gw
+   manage_transit_gateway_attachment = false
+}
+
+resource "aviatrix_spoke_transit_attachment" "spoke_transit_attachment_1" {
+   count             = var.tag.spoke_count
+   spoke_gw_name     = element(aviatrix_spoke_gateway.spoke_ondemand_gw.*.gw_name,count.index)
+   transit_gw_name   = var.transit_gw
+   depends_on        = [aviatrix_spoke_gateway.spoke_ondemand_gw]
 }
 
